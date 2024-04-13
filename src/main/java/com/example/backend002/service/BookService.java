@@ -16,4 +16,6 @@ public class BookService{
         bookRepository.deleteById(id);
     }
     public void add(){}
+
+    public void show(){}
 }
