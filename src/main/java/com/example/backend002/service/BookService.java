@@ -15,4 +15,5 @@ public class BookService{
     public void deleteBookById(Integer id){
         bookRepository.deleteById(id);
     }
+    public void add(){}
 }
