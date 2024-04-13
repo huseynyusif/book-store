@@ -11,4 +11,8 @@ public class BookService{
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
+
+    public void deleteBookById(Integer id){
+        bookRepository.deleteById(id);
+    }
 }
