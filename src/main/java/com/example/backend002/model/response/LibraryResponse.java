@@ -1,5 +1,6 @@
 package com.example.backend002.model.response;
 
+import com.example.backend002.dao.entity.LibraryEntity;
 import com.example.backend002.dao.entity.UserEntity;
 import lombok.*;
 
