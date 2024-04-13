@@ -21,9 +21,9 @@ public class BookEntity {
     private String title;
     private String author;
 
-   @ManyToOne
-//    @JoinColumn(name = "library_id")
-//    private LibraryEntity library;
+    @ManyToOne
+    @JoinColumn(name = "library_id")
+    private LibraryEntity library;
 
 
 }
