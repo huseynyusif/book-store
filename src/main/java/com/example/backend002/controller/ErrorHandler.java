@@ -9,10 +9,12 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +22,13 @@ import java.util.List;
 @RestControllerAdvice
 public class ErrorHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<Object> handle(ConstraintViolationException ex) {
-        log.error("ConstraintViolationException ", ex);
-        List<ExceptionResponse> errors = new ArrayList<>();
-
-        ex.getConstraintViolations()
-                .forEach(e -> errors.add(new ExceptionResponse(e.getMessage())));
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    public ExceptionResponse handleAllException(Exception ex, WebRequest request) {
+        log.error("Exception ", ex);
+        return new ExceptionResponse(LocalDateTime.now(),
+                ex.getMessage(),
+                request.getDescription(false));
     }
 
     @Override
@@ -35,12 +36,8 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers,
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
-        log.error("Validation exception: ", ex);
-        List<ExceptionResponse> errors = new ArrayList<>();
-
-        ex.getBindingResult()
-                .getFieldErrors()
-                .forEach(o -> errors.add(new ExceptionResponse(o.getDefaultMessage())));
-        return ResponseEntity.status(status).body(errors);
+        log.error("MethodArgumentNotValidException ", ex);
+        return ResponseEntity.ok(new ExceptionResponse(LocalDateTime.now(), ex.getMessage(),
+                request.getDescription(false)));
     }
 }
