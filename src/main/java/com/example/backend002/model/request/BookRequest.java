@@ -9,6 +9,7 @@ import lombok.*;
 @Getter
 @Builder
 public class BookRequest {
+    private Integer id;
     private String title;
     private String author;
     private LibraryCreateRequest library;

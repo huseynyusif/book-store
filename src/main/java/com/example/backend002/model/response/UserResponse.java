@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -21,5 +22,6 @@ public class UserResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updateAt;
     private LibraryResponse library;
+    private List<BookResponse> books;
 
 }

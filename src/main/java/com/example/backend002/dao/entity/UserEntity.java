@@ -1,11 +1,13 @@
 package com.example.backend002.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Builder
@@ -34,4 +36,6 @@ public class UserEntity {
     @JoinColumn(name = "library_id")
     private LibraryEntity library;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<BookEntity> books;
 }

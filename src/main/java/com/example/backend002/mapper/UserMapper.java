@@ -1,23 +1,26 @@
 package com.example.backend002.mapper;
 
 import com.example.backend002.dao.entity.UserEntity;
-import com.example.backend002.model.request.LibraryCreateRequest;
+import com.example.backend002.model.request.UserCreateRequest;
 import com.example.backend002.model.request.UserRequest;
 import com.example.backend002.model.response.UserResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserResponse EntityToResponse(UserEntity userEntity);
+    UserResponse entityToResponse(UserEntity userEntity);
 
 
-    UserEntity ResponseToEntity(UserResponse userResponse);
+    UserEntity responseToEntity(UserResponse userResponse);
 
-    UserRequest EntityToRequest(UserEntity userEntity);
+    UserRequest entityToRequest(UserEntity userEntity);
 
-    UserEntity RequestToEntity(UserRequest userRequest);
+    UserEntity requestToEntity(UserRequest userRequest);
 
+    UserCreateRequest entityToCreateRequest(UserEntity userEntity);
 
+    UserEntity createRequestToEntity(UserCreateRequest userCreateRequest);
 }
