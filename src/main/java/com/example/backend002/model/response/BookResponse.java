@@ -1,18 +1,25 @@
 package com.example.backend002.model.response;
 
-import com.example.backend002.dao.entity.LibraryEntity;
+import com.example.backend002.dao.entity.MemberEntity;
+import com.example.backend002.enums.BookStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
+import java.util.ArrayList;
+import java.util.List;
+
+@Builder
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class BookResponse {
 
+    private Long id;
     private String title;
     private String author;
-    private String status;
-    private LibraryResponse library;
+    private Integer cost;
+    private BookStatus status;
 
 }
