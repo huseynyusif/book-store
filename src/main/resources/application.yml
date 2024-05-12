@@ -6,10 +6,11 @@ spring:
 
   liquibase:
     change-log: liquibase/changelog-master.yaml
+    enabled: false
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: true
 server:
   port: 8081

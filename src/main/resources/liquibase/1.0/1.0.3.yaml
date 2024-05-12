@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_role_column_to_users_table
+      author: Huseyn
+      changes:
+        - sql:
+            dbms: postgresql
+            endDelimiter: ';'
+            splitStatements: true
+            sql: ALTER TABLE users ADD COLUMN role VARCHAR(255);

@@ -1,18 +1,19 @@
 package com.example.backend002.dao.entity;
 
+import com.example.backend002.enums.BookStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-@Getter
-@Setter
+@Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "book")
+@Table(name = "books")
 @Entity
 public class BookEntity {
 
@@ -22,18 +23,12 @@ public class BookEntity {
 
     private String title;
     private String author;
-    private String status;
+    private Integer cost;
 
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "library_id")
-    private LibraryEntity library;
+    @Enumerated(EnumType.STRING)
+    private BookStatus status;//String
 
-    @ManyToOne
+    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
     @JsonBackReference
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
-    public boolean isActive() {
-        return "active".equals(this.status);
-    }
+    private List<MemberEntity> members = new ArrayList<>();
 }
